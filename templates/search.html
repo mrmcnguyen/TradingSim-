@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Stocks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="contentContainer">
+
+        <div class = "ce">
+        <h2 class="buyStockHeading">Buy Stocks</h2>
+        <form class="buyForm" method="POST" action="{{ url_for('search') }}">
+            <input class="searchBar" type="text" name="searchTerm" placeholder="Search" required>
+            <br>
+            <button class="searchButton" type="submit">Search</button>
+        </form>
+
+        {% if search_term %}
+            <h3>Search Results for "{{ search_term }}"</h3>
+            {% if stocks %}
+            <div class="results">
+                <ul>
+                    {% for symbol in stocks %}
+                        <li><a class="tickerButton" href="{{ url_for('stock_details', symbol=symbol) }}">{{ symbol }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No results found.</p>
+            {% endif %}
+        </div>
+        {% endif %}
+        <a class="backButton" href="'{{ url_for('index')}}">Back</a>
+        </div>
+    </div>
+</body>
+</html>

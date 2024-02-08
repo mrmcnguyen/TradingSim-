@@ -1,0 +1,21 @@
+<!-- templates/sell.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Stocks</title>
+</head>
+<body>
+    <h2>Sell Stocks</h2>
+    <form method="POST" action="{{ url_for('sell') }}">
+        <label for="symbol">Stock Symbol:</label>
+        <input type="text" name="symbol" required>
+        <br>
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" required>
+        <br>
+        <label for="price">Price per Share:</label>
+        <input type

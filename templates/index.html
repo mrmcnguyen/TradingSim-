@@ -1,0 +1,28 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Simulator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboardContainer">
+        <div class="dashboardContentsContainer">
+    <h1>Welcome, {{ user[1] }}</h1>
+    <p>Balance: ${{ user[2] }}</p>
+    <h2>Your Portfolio</h2>
+    <ul>
+        {% for stock in portfolio %}
+            <li>{{ stock[0] }} - Quantity: {{ stock[1] }}</li>
+        {% endfor %}
+    </ul>
+    <a href="'{{ url_for('search')}}">TRADE</a>
+    <!-- <a href="'{{ url_for('sell')}}">SELL</a> -->
+</div>
+</div>
+</body>
+</html>
