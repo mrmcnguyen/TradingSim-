@@ -14,13 +14,13 @@
         <div class="dashboardContentsContainer">
     <h1>Welcome, {{ user[1] }}</h1>
     <p>Balance: ${{ user[2] }}</p>
-    <h2>Your Portfolio</h2>
+    <h2 class="orderHeading">Your Portfolio</h2>
     <ul>
         {% for stock in portfolio %}
             <li>{{ stock[0] }} - Quantity: {{ stock[1] }}</li>
         {% endfor %}
     </ul>
-    <a href="'{{ url_for('search')}}">TRADE</a>
+    <a class="tradeButton" href="'{{ url_for('search')}}">TRADE</a>
     <!-- <a href="'{{ url_for('sell')}}">SELL</a> -->
 </div>
 </div>

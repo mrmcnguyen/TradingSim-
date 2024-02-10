@@ -24,7 +24,7 @@
             <div class="results">
                 <ul>
                     {% for symbol in stocks %}
-                        <li><a class="tickerButton" href="{{ url_for('stock_details', symbol=symbol) }}">{{ symbol }}</a></li>
+                        <li><a class="tickerButton" href="{{ url_for('stock_details', symbol=symbol['symbol']) }}">{{ symbol['symbol'] }} - {{ symbol['symbolName'] }}</a></li>
                     {% endfor %}
                 </ul>
             {% else %}

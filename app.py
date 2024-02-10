@@ -1,6 +1,6 @@
 # app.py
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 import sqlite3
 import os
 import database
@@ -19,8 +19,8 @@ def create_table():
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT NOT NULL,
-            balance REAL NOT NULL
-        )
+            balance REAL NOT NULL DEFAULT 0.0
+        );
     ''')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS transactions (
@@ -47,7 +47,7 @@ def welcome():
     if request.method == 'POST':
         name = request.form['name']
         userID = 1
-        database.register_user(name, userID)
+        database.register_user(name, 1000)
         return redirect(url_for('index'))
     
     return render_template('welcome.html')
@@ -85,40 +85,46 @@ def search():
     print("STocks: ")
     print(stocks)
 
+    stocks = [{'symbol': stock.split(" - ")[0], 'symbolName': stock.split(" - ")[1]} for stock in stocks]
+
+    print(stocks)
     # For demonstration purposes, let's just display the search term
     return render_template('search.html', search_term=search_term, stocks=stocks)
 
-@app.route('/buy', methods=['GET', 'POST'])
-def buy():
+@app.route('/buy/<ticker>', methods=['POST', 'GET'])
+def buy(ticker):
 
+    print("BUY FUNCTION RAN")
+    stock_data = market.get_info(ticker)
+
+    # Check if a form is submitted
     if request.method == 'POST':
-        user_id = 1  # Change this to the logged-in user's ID
-        symbol = request.form['symbol']
-        quantity = int(request.form['quantity'])
-        price = float(request.form['price'])
+        quantity = int(request.form.get('quantity'))
+        order_type = request.form.get('orderType')
 
-        conn = sqlite3.connect(DATABASE)
-        cursor = conn.cursor()
+        # Calculate total price (replace with your actual logic)
+        total_price = market.calculate_price(ticker, quantity, order_type)
 
-        # Check if the user has enough balance
-        user = database.get_user(user_id)
-        if user[2] >= quantity * price:
-            # Update user balance
-            new_balance = user[2] - quantity * price
-            cursor.execute('UPDATE users SET balance = ? WHERE id = ?', (new_balance, user_id))
+        userID = 1
+        user_balance = database.get_user_balance(userID)[0]
+        print(user_balance)
 
-            # Add a new buy transaction
-            cursor.execute('INSERT INTO transactions (user_id, symbol, quantity, price, transaction_type) VALUES (?, ?, ?, ?, ?)',
-                           (user_id, symbol, quantity, price, 'BUY'))
+        if user_balance < total_price:
+            flash("Insufficient Funds.")
+            return redirect(url_for('index'))
 
-            conn.commit()
-        else:
-            return "Insufficient funds to complete the purchase"
+        # Store order details in session
+        session['order_details'] = {
+            'symbol': ticker,
+            'quantity': quantity,
+            'order_type': order_type,
+            'total_price': total_price
+        }
 
-        conn.close()
-        return redirect(url_for('index'))
+        return render_template('buy.html', stock_data=stock_data, order_details=session['order_details'])
+    
 
-    return render_template('buy.html')
+
 
 @app.route('/sell', methods=['GET', 'POST'])
 def sell():
@@ -162,7 +168,6 @@ def stock_details(symbol):
 
     print("Stock Data: ")
     print(stock_data)
-
     # Render the stock details template with the stock data
     return render_template('stock.html', stock_data=stock_data)
 

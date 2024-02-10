@@ -15,6 +15,14 @@ def get_user(user_id):
     conn.close()
     return user
 
+def get_user_balance(user_id):
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    cursor.execute('SELECT balance FROM users WHERE id = ?', (user_id,))
+    balance = cursor.fetchone()
+    conn.close()
+    return balance
+
 def get_portfolio(user_id):
     conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()

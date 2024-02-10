@@ -3,7 +3,7 @@ import json
 
 def search_stocks(search_term): # Returns a list of stocks associated with search term
     stocks = []
-    #url = f'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords={search_term}&apikey=demo'
+    #url = f'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords={search_term}&apikey=DKNFKQ8CGWZMRZSO'
     url = 'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=tesco&apikey=demo'
     r = requests.get(url)
     data = r.json()
@@ -17,8 +17,14 @@ def search_stocks(search_term): # Returns a list of stocks associated with searc
 
 def get_info(ticker):
     
+    #url = f'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={ticker}&apikey=DKNFKQ8CGWZMRZSO'
     url = f'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=demo'
     r = requests.get(url)
     data = r.json()
 
     return data
+
+def calculate_price(ticker, quantity, order_type):
+    ticker_price = float(get_info(ticker)['Global Quote']['05. price'])
+
+    return ticker_price * quantity
