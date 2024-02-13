@@ -365,3 +365,7 @@ button {
 .tradeButton {
     width: 40%;
 }
+
+.userBalanceDisplayStock {
+    padding-left: 50px;
+}

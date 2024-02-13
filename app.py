@@ -41,20 +41,20 @@ def create_table():
 def welcome():
     create_table()
 
-    if database.get_user(1):
+    if database.get_user(4):
         return redirect(url_for('index'))
     
     if request.method == 'POST':
         name = request.form['name']
         userID = 1
-        database.register_user(name, 1000)
+        database.register_user(userID, name, 1000)
         return redirect(url_for('index'))
     
     return render_template('welcome.html')
 
 @app.route("/home")
 def index():
-    user_id = 1  # Change this to the logged-in user's ID
+    user_id = 4  # Change this to the logged-in user's ID
     user = database.get_user(user_id)
     portfolio = database.get_portfolio(user_id)
     print(user)
@@ -105,7 +105,7 @@ def buy(ticker):
         # Calculate total price (replace with your actual logic)
         total_price = market.calculate_price(ticker, quantity, order_type)
 
-        userID = 1
+        userID = 4
         user_balance = database.get_user_balance(userID)[0]
         print(user_balance)
 
@@ -113,12 +113,17 @@ def buy(ticker):
             flash("Insufficient Funds.")
             return redirect(url_for('index'))
 
+        remaining_balance = user_balance - total_price
+        database.update_user_balance(remaining_balance, userID)
+        print()
+
         # Store order details in session
         session['order_details'] = {
             'symbol': ticker,
             'quantity': quantity,
             'order_type': order_type,
-            'total_price': total_price
+            'total_price': total_price,
+            'buying_power':remaining_balance
         }
 
         return render_template('buy.html', stock_data=stock_data, order_details=session['order_details'])
@@ -162,14 +167,16 @@ from flask import render_template
 
 @app.route('/stock_details/<symbol>')
 def stock_details(symbol):
+    userID = 4
     # Fetch stock data based on the symbol
     # Replace this with your logic to get stock data
     stock_data = market.get_info(symbol)
+    user_balance = database.get_user_balance(userID)
 
     print("Stock Data: ")
     print(stock_data)
     # Render the stock details template with the stock data
-    return render_template('stock.html', stock_data=stock_data)
+    return render_template('stock.html', stock_data=stock_data, user_balance=user_balance)
 
 
 

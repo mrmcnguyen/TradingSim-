@@ -1,6 +1,6 @@
 from app import *
 
-def register_user(username, balance):
+def register_user(userID, username, balance):
     conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
     cursor.execute('INSERT INTO users (username, balance) VALUES (?, ?)', (username, balance))
@@ -22,6 +22,14 @@ def get_user_balance(user_id):
     balance = cursor.fetchone()
     conn.close()
     return balance
+
+def update_user_balance(balance, userID):
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    cursor.execute('UPDATE users SET balance = ? WHERE id = ?', (balance, userID))
+    conn.commit()
+    cursor.close()
+    conn.close()
 
 def get_portfolio(user_id):
     conn = sqlite3.connect(DATABASE)

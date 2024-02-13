@@ -20,7 +20,7 @@
             <li>{{ stock[0] }} - Quantity: {{ stock[1] }}</li>
         {% endfor %}
     </ul>
-    <a class="tradeButton" href="'{{ url_for('search')}}">TRADE</a>
+    <a class="tradeButton" href="{{ url_for('search') }}">TRADE</a>
     <!-- <a href="'{{ url_for('sell')}}">SELL</a> -->
 </div>
 </div>

@@ -18,10 +18,14 @@
                 <p><strong>Quantity:</strong> {{ order_details['quantity'] }}</p>
                 <p><strong>Order Type:</strong> {{ order_details['order_type'] }}</p>
                 <p><strong>Total Price:</strong> ${{ order_details['total_price'] }}</p>
+                <p><strong>Buying Power:</strong> ${{ order_details['buying_power'] }}</p>
             </div>
 
             <p>Your order has been confirmed.</p>
         </div>
+
+        <a class="backButton" href="{{ url_for('index') }}">Back</a>
+
         </div>
     </div>
 </body>
