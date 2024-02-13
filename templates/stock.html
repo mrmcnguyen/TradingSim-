@@ -77,7 +77,7 @@
                 </label>
                 </div>
             <div class="balanceDisplayColumn">
-                <p class="userBalanceDisplayStock"><strong>Buying Power:</strong> ${{ user_balance[0] }}</p>
+                <p class="userBalanceDisplayStock"><strong>Buying Power:</strong> ${{ user_balance[0]|float|round(2) }}</p>
                 </div>
                 <a class="stockBackButton" href="{{ url_for('search') }}">Back to Search</a>
                 </div>

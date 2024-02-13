@@ -11,17 +11,35 @@
 </head>
 <body>
     <div class="dashboardContainer">
+
+        <h1>Welcome, {{ user[1] }}</h1>
+
+        <div class="dashboardContents">
+            <div class="portfolioBox">
+                <h2 class="boxHeader">Portfolio Value</h2>
+                <p class="dashboardDisplay">$</p>
+            </div>
+    
+            <div class="balanceBox">
+                <h2 class="boxHeader">Balance</h2>
+                <p class="dashboardDisplay">${{ user[2]|float|round(2) }}</p>
+            </div>
+    
+            <div class="gainBox">
+                <h2 class="boxHeader">Net Profit/Loss</h2>
+                <p class="dashboardDisplay">${{ net_profit_loss }}</p>
+            </div>
+        </div>
+
         <div class="dashboardContentsContainer">
-    <h1>Welcome, {{ user[1] }}</h1>
-    <p>Balance: ${{ user[2] }}</p>
-    <h2 class="orderHeading">Your Portfolio</h2>
+    <h2 class="dashboardHeading">Your Portfolio</h2>
     <ul>
         {% for stock in portfolio %}
             <li>{{ stock[0] }} - Quantity: {{ stock[1] }}</li>
         {% endfor %}
     </ul>
-    <a class="tradeButton" href="{{ url_for('search') }}">TRADE</a>
     <!-- <a href="'{{ url_for('sell')}}">SELL</a> -->
+    <a class="tradeButton" href="{{ url_for('search') }}">TRADE</a>
 </div>
 </div>
 </body>

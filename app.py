@@ -117,6 +117,13 @@ def buy(ticker):
         database.update_user_balance(remaining_balance, userID)
         print()
 
+        conn = sqlite3.connect(DATABASE)
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO transactions (user_id, symbol, quantity, price, transaction_type) VALUES (?, ?, ?, ?, ?)',
+                (userID, ticker, quantity, total_price, 'SELL'))
+        conn.commit()
+        conn.close()
+
         # Store order details in session
         session['order_details'] = {
             'symbol': ticker,
