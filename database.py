@@ -35,7 +35,7 @@ def get_portfolio(user_id):
     conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
     cursor.execute('''
-        SELECT symbol, SUM(quantity) as total_quantity
+        SELECT symbol, SUM(quantity) as total_quantity, price * quantity as total_price
         FROM transactions
         WHERE user_id = ?
         GROUP BY symbol

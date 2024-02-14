@@ -10,9 +10,12 @@
 
 ul {
     list-style: none;
+    padding: 0;
 }
 
-
+h1 {
+    color:#D5D8DC
+}
 body {
     margin: 0;
     display: flex;
@@ -28,6 +31,12 @@ body {
     overflow-x: auto;
 }
 
+.logo {
+    font-size: 1.5em;
+   color: #4e5863;
+   text-align: center;
+}
+
 .welcomeContainer {
     display: flex;
     flex-direction: column;
@@ -40,18 +49,26 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh; 
+    width: 80vw;
 }
 
 .dashboardContentsContainer {
     display: flex;
     margin-top: 20px;
+    margin-right: 20px;
     flex-direction: column;
     border-radius: 10px;
-    width: 80vw;
+    width: 50vw;
     padding: 20px;
     justify-content: center;
     background-color: #34495E;
     text-align: center;
+    width: calc(66.66%); /* This container takes 66.66% of the width with 20px spacing */
+    box-sizing: border-box;
+    transition: box-shadow 0.3s;
+}
+.dashboardContentsContainer:hover {
+    box-shadow: 0 0 5px 3px #D5D8DC;
 }
 
 
@@ -63,6 +80,35 @@ body {
     padding: 20px;
     margin-top: 20px;
     text-align: center;
+    transition: box-shadow 0.3s;
+}
+
+.dashboardContents:hover {
+    box-shadow: 0 0 5px 3px #D5D8DC;
+}
+
+.secondRow {
+    display:flex;
+    width: 80vw;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.topMoversContainer {
+    display: flex;
+    flex-direction: row;
+    background-color: #34495E;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    width: calc(33.33%); /* This container takes 33.33% of the width with 20px spacing */
+    box-sizing: border-box;
+    transition: box-shadow 0.3s;
+}
+
+.topMoversContainer:hover {
+    box-shadow: 0 0 5px 3px #D5D8DC;
 }
 
 .portfolioBox {
@@ -72,9 +118,7 @@ body {
     padding: 20px;
     flex: 1;
     background-color: #08AEEA;
-
-    
-    background-image: linear-gradient(0deg, #4dbfe9 0%, #86f0c0 100%);
+    background-image: linear-gradient(135deg, #4dbfe9 0%, #86f0c0 100%);
     text-align: center;
 
 }
@@ -331,9 +375,11 @@ button {
     border-color: #3498db;
   }
 
+
   
 .backButton {
     width: 200px;
+    margin-top:20px
 }
 
 .stockBackButton {
@@ -408,6 +454,7 @@ button {
 .dashboardHeading{
     margin-top: 0;
     padding: 0;
+    color: #D5D8DC;
 }
 .buy {
     background-color: #0dc434;
@@ -435,25 +482,27 @@ button {
     border-color: #00f19f #00FD92;
     box-shadow:  5px 5px 100px #61dafbaa; /* Added box-shadow property */
 }
-
-
+         
 .tradeButton {
-    width: 220px;
-    height: 50px;
-    border: none;
-    outline: none;
-    color: #fff;
-    background: #00f19f;
-    cursor: pointer;
-    position: relative;
-    z-index: 0;
+    background-image: linear-gradient(to right, #00C9FF 0%, #92FE9D  51%, #00C9FF  100%);
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
     border-radius: 10px;
-}
-
-.tradeButton:hover {
-    background-position: right center; /* change the direction of the change here */
+    border: 0;
+    display: block;
   }
 
+  .tradeButton:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+ 
 @keyframes glowing {
 0% { background-position: 0 0; }
 50% { background-position: 400% 0; }
@@ -462,4 +511,33 @@ button {
 
 .userBalanceDisplayStock {
     padding-left: 50px;
+}
+
+.portfolioList {
+    list-style: none;
+    padding: 0;
+}
+
+.portfolioItem {
+    margin: 10px 0;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #2C3E50;
+    color: #D5D8DC;
+    transition: box-shadow 0.3s;
+    cursor: pointer;
+}
+
+
+.stockDetailsGrid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.column {
+    flex: 1;
+    padding: 10px;
+    width: 40%;
+    text-align: left;
 }

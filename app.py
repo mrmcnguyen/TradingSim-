@@ -59,7 +59,15 @@ def index():
     portfolio = database.get_portfolio(user_id)
     print(user)
     print(portfolio)
-    return render_template('index.html', user=user, portfolio=portfolio)
+
+    portfolioValue = 0
+
+    for stock in portfolio:
+        portfolioValue += stock[2]
+
+    #top_movers = market.get_top_movers()
+
+    return render_template('index.html', user=user, portfolio=portfolio, portfolioValue=portfolioValue)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():

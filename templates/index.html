@@ -12,12 +12,13 @@
 <body>
     <div class="dashboardContainer">
 
+        <h4 class="logo">Trading Simulator 2024. All trades are simulations with real data.</h4>
         <h1>Welcome, {{ user[1] }}</h1>
 
         <div class="dashboardContents">
             <div class="portfolioBox">
                 <h2 class="boxHeader">Portfolio Value</h2>
-                <p class="dashboardDisplay">$</p>
+                <p class="dashboardDisplay">${{ portfolioValue|float|round(2) }}</p>
             </div>
     
             <div class="balanceBox">
@@ -31,15 +32,35 @@
             </div>
         </div>
 
+        <div class="secondRow">
         <div class="dashboardContentsContainer">
     <h2 class="dashboardHeading">Your Portfolio</h2>
-    <ul>
-        {% for stock in portfolio %}
-            <li>{{ stock[0] }} - Quantity: {{ stock[1] }}</li>
-        {% endfor %}
-    </ul>
+        <ul>
+            {% for stock in portfolio %}
+            <li class="portfolioItem">
+                <div class="stockDetailsGrid">
+                    <div class="column">
+                        <p>{{ stock[0] }}</p>
+                    </div>
+                    <div class="column">
+                        <p>Quantity: {{ stock[1] }}</p>
+                    </div>
+                    <div class="column">
+                        <p>Value: {{ stock[2] }}</p>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
     <!-- <a href="'{{ url_for('sell')}}">SELL</a> -->
     <a class="tradeButton" href="{{ url_for('search') }}">TRADE</a>
+</div>
+    <div class="topMoversContainer">
+        <h2 class="dashboardHeading">Top Movers</h2>
+        <div class="topMoversTable">
+        
+        </div>
+    </div>
 </div>
 </div>
 </body>
