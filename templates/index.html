@@ -13,6 +13,7 @@
     <div class="dashboardContainer">
 
         <h4 class="logo">Trading Simulator 2024. All trades are simulations with real data.</h4>
+        <h5 class="disclaimer">Please note all data on this page is only refreshed when the page is reloaded.</h5>
         <h1>Welcome, {{ user[1] }}</h1>
 
         <div class="dashboardContents">
@@ -43,10 +44,13 @@
                         <p>{{ stock[0] }}</p>
                     </div>
                     <div class="column">
-                        <p>Quantity: {{ stock[1] }}</p>
+                        <p>Position: {{ stock[1] }}</p>
                     </div>
                     <div class="column">
                         <p>Value: {{ stock[2] }}</p>
+                    </div>
+                    <div class="column">
+                        <p>P&L: {{ stock[4] }}</p>
                     </div>
                 </div>
             </li>
@@ -58,9 +62,47 @@
     <div class="topMoversContainer">
         <h2 class="dashboardHeading">Top Movers</h2>
         <div class="topMoversTable">
-        
+            <ul class="topMovers">
+                <li class="legendContainer">
+                    <div class="legend">
+                        <div class="column">
+                            <p>Name</p>
+                        </div>
+                        <div class="column">
+                            <p>Price</p>
+                        </div>
+                        <div class="column">
+                            <p>Change Amount</p>
+                        </div>
+                        <div class="column">
+                            <p>Change Percentage </p>
+                        </div>
+                </li>
+                {% for stock in top_movers %}
+                <li class="moverItem">
+                    <div class="topMoversTable">
+                        <div class="column">
+                            <p>{{ stock['ticker'] }}</p>
+                        </div>
+                        <div class="column">
+                            <p>{{ stock['price'] }}</p>
+                        </div>
+                        <div class="column">
+                            <p>{{ stock['change_amount'] }}</p>
+                        </div>
+                        <div class="column">
+                            <p>{{ stock['change_percentage'] }} </p>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
+</div>
+<div class="footer">
+    <h5>&copy; 2024 Trading Simulator. All rights reserved.</h5>
+    <h6>Powered by Jinja within the Flask framework. Stock data provided by <a class="link" href="https://www.alphavantage.co/"  target="_blank"><u>Alpha Vantage API</u></a>. All information is stored locally.</h6>
 </div>
 </div>
 </body>

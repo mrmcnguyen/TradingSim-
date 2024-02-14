@@ -23,12 +23,13 @@ def create_table():
         );
     ''')
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS transactions (
+        CREATE TABLE IF NOT EXISTS Transactions (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id INTEGER,
             symbol TEXT NOT NULL,
             quantity INTEGER NOT NULL,
             price REAL NOT NULL,
+            stock_price REAL NOT NULL,
             transaction_type TEXT NOT NULL,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES users (id)
@@ -41,33 +42,51 @@ def create_table():
 def welcome():
     create_table()
 
-    if database.get_user(4):
+    if database.get_user(1):
         return redirect(url_for('index'))
     
     if request.method == 'POST':
         name = request.form['name']
         userID = 1
         database.register_user(userID, name, 1000)
+        print("This ran")
         return redirect(url_for('index'))
     
     return render_template('welcome.html')
 
 @app.route("/home")
 def index():
-    user_id = 4  # Change this to the logged-in user's ID
+    user_id = 1  # Change this to the logged-in user's ID
     user = database.get_user(user_id)
-    portfolio = database.get_portfolio(user_id)
+    portfolio = [list(stock) for stock in database.get_portfolio(user_id)]
+    # Convert tuples into list
+    
+    if portfolio is None:
+        portfolio = [0]
     print(user)
-    print(portfolio)
 
     portfolioValue = 0
 
     for stock in portfolio:
-        portfolioValue += stock[2]
+        portfolioValue += stock[1] * stock[3]
 
-    #top_movers = market.get_top_movers()
+    #print(f"Ticker Price: {market.get_ticker_price(stock[0])}")
+    #print(f"Purchase Price: {stock[3]}")
 
-    return render_template('index.html', user=user, portfolio=portfolio, portfolioValue=portfolioValue)
+    for stock in portfolio:
+        if market.get_ticker_price(stock[0]) > stock[3]:
+            stock.append(market.get_ticker_price(stock[0]) - stock[3])
+        elif market.get_ticker_price(stock[0]) < stock[3]:
+            stock.append(market.get_ticker_price(stock[3]) - stock[0])
+        elif market.get_ticker_price(stock[0]) == stock[3]: 
+            stock.append(0)
+        else:
+            stock.append(0)
+
+    top_movers = market.get_top_movers()
+    print(portfolio)
+
+    return render_template('index.html', user=user, portfolio=portfolio, portfolioValue=portfolioValue, top_movers=top_movers)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -111,26 +130,33 @@ def buy(ticker):
         order_type = request.form.get('orderType')
 
         # Calculate total price (replace with your actual logic)
+        ticker_price = market.get_ticker_price(ticker)
         total_price = market.calculate_price(ticker, quantity, order_type)
 
-        userID = 4
+        userID = 1
         user_balance = database.get_user_balance(userID)[0]
         print(user_balance)
 
         if user_balance < total_price:
             flash("Insufficient Funds.")
             return redirect(url_for('index'))
-
-        remaining_balance = user_balance - total_price
-        database.update_user_balance(remaining_balance, userID)
-        print()
+    
 
         conn = sqlite3.connect(DATABASE)
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO transactions (user_id, symbol, quantity, price, transaction_type) VALUES (?, ?, ?, ?, ?)',
-                (userID, ticker, quantity, total_price, 'SELL'))
+        cursor.execute('INSERT INTO Transactions (user_id, symbol, quantity, price, stock_price, transaction_type) VALUES (?, ?, ?, ?, ?, ?)',
+                (userID, ticker, quantity, total_price, ticker_price, 'SELL'))
+        
+        if database.owns_stock(ticker, userID):
+            compoundBalance = total_price + database.get_holdings(ticker, 1)
+            cursor.execute('''UPDATE Transactions
+                           SET balance = ?
+                           WHERE user_id= ?''', (compoundBalance, userID))
         conn.commit()
         conn.close()
+
+        remaining_balance = user_balance - total_price
+        database.update_user_balance(remaining_balance, userID)
 
         # Store order details in session
         session['order_details'] = {
@@ -182,7 +208,7 @@ from flask import render_template
 
 @app.route('/stock_details/<symbol>')
 def stock_details(symbol):
-    userID = 4
+    userID = 1
     # Fetch stock data based on the symbol
     # Replace this with your logic to get stock data
     stock_data = market.get_info(symbol)

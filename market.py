@@ -3,8 +3,8 @@ import json
 
 def search_stocks(search_term): # Returns a list of stocks associated with search term
     stocks = []
-    url = f'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords={search_term}&apikey=DKNFKQ8CGWZMRZSO'
-    #url = 'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=tesco&apikey=demo'
+    #url = f'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords={search_term}&apikey=DKNFKQ8CGWZMRZSO'
+    url = 'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=tesco&apikey=demo'
     r = requests.get(url)
     data = r.json()
     # Extract "symbol" and "symbol name" pairs
@@ -17,8 +17,8 @@ def search_stocks(search_term): # Returns a list of stocks associated with searc
 
 def get_info(ticker):
     
-    url = f'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={ticker}&apikey=DKNFKQ8CGWZMRZSO'
-    #url = f'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=demo'
+    #url = f'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={ticker}&apikey=DKNFKQ8CGWZMRZSO'
+    url = f'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=demo'
     r = requests.get(url)
     data = r.json()
 
@@ -35,6 +35,8 @@ def calculate_price(ticker, quantity, order_type):
     return ticker_price * quantity
 
 def get_top_movers():
+
+    movers = []
     #url = 'https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=DKNFKQ8CGWZMRZSO'
     url = 'https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=demo'
     r = requests.get(url)
@@ -43,4 +45,10 @@ def get_top_movers():
     top_gainers = data['top_gainers'][:3]
     top_losers = data['top_losers'][:3]
 
-    return top_gainers, top_losers
+    for i in top_gainers:
+        movers.append(i)
+
+    for i in top_losers:
+        movers.append(i)
+
+    return movers

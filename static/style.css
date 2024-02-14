@@ -16,6 +16,10 @@ ul {
 h1 {
     color:#D5D8DC
 }
+
+h5, h6 {
+    color: #4e5863;
+}
 body {
     margin: 0;
     display: flex;
@@ -35,6 +39,12 @@ body {
     font-size: 1.5em;
    color: #4e5863;
    text-align: center;
+}
+
+.disclaimer {
+    color: #4e5863;
+    font-size: 1em;
+    text-align: center;
 }
 
 .welcomeContainer {
@@ -66,6 +76,7 @@ body {
     width: calc(66.66%); /* This container takes 66.66% of the width with 20px spacing */
     box-sizing: border-box;
     transition: box-shadow 0.3s;
+    flex:2
 }
 .dashboardContentsContainer:hover {
     box-shadow: 0 0 5px 3px #D5D8DC;
@@ -90,13 +101,13 @@ body {
 .secondRow {
     display:flex;
     width: 80vw;
-    flex-direction: row;
     justify-content: space-between;
+    align-items: flex-start;
 }
 
 .topMoversContainer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     background-color: #34495E;
     border-radius: 10px;
     padding: 20px;
@@ -105,10 +116,28 @@ body {
     width: calc(33.33%); /* This container takes 33.33% of the width with 20px spacing */
     box-sizing: border-box;
     transition: box-shadow 0.3s;
+    flex:1;
 }
 
 .topMoversContainer:hover {
     box-shadow: 0 0 5px 3px #D5D8DC;
+}
+
+.legend{
+    display: flex;
+    flex-direction: row;
+}
+
+.topMoversTable {
+    display:flex;
+    width: 100%
+}
+
+.topMovers{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
 }
 
 .portfolioBox {
@@ -211,17 +240,6 @@ form{
     padding-left: none;
 }
 
-.buyForm {
-    display: flex;
-    flex-direction: column;
-    margin:0;
-    width: 100%;
-    height: 20%;
-    justify-content: center;
-    text-align: center;
-    max-height: 140px;
-    
-}
 .textEntry{
     border: 1px solid;
     border-radius: 0.4rem;
@@ -271,6 +289,23 @@ a:hover {
     border-color: #3498db;
   }
 
+.link {
+    font-size:small;
+    background-color: transparent;
+    color: #4e5863;
+    border: 0;
+    padding: 0;
+}
+
+.link:hover {
+    font-size:small;
+    background-color: transparent;
+    color: #4e5863;
+    border: 0;
+}
+
+
+
 .start {
     width: 100%;
     display: inline-block;
@@ -305,6 +340,8 @@ a:hover {
 /* Add this to your style.css file */
 .stockDetailsGrid {
     display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 
 }
 
@@ -362,11 +399,6 @@ button {
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     max-width: 100%; /* Set maximum width to prevent overflow */
-}
-
-/* Adjust this width based on your preference */
-.buyForm button {
-    width: 200px; /* Set a specific width or use percentage */
 }
   
   button:hover {
@@ -469,11 +501,6 @@ button {
     width: 5%
 }
 
-.buyForm {
-    margin: 0;
-    margin-top: 20px;
-}
-
 .border{
     padding: 40px;
     border-radius: 25px;
@@ -502,12 +529,6 @@ button {
     color: #fff;
     text-decoration: none;
   }
- 
-@keyframes glowing {
-0% { background-position: 0 0; }
-50% { background-position: 400% 0; }
-100% { background-position: 0 0; }
-}
 
 .userBalanceDisplayStock {
     padding-left: 50px;
@@ -528,6 +549,25 @@ button {
     cursor: pointer;
 }
 
+.moverItem {
+    width: 100%;
+    margin: 10px 0;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #2C3E50;
+    color: #D5D8DC;
+    transition: box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.legendContainer {
+    width: 100%;
+    border-radius: 5px;
+    color: #D5D8DC;
+    transition: box-shadow 0.3s;
+    cursor: pointer;
+    border-bottom: #00FD92;
+}
 
 .stockDetailsGrid {
     display: flex;

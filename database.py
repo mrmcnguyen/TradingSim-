@@ -35,8 +35,8 @@ def get_portfolio(user_id):
     conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
     cursor.execute('''
-        SELECT symbol, SUM(quantity) as total_quantity, price * quantity as total_price
-        FROM transactions
+        SELECT symbol, SUM(quantity) as total_quantity, price * quantity as total_price, stock_price
+        FROM Transactions
         WHERE user_id = ?
         GROUP BY symbol
     ''', (user_id,))
@@ -49,9 +49,36 @@ def get_stocks_owned(user_id, symbol):
     cursor = conn.cursor()
     cursor.execute('''
         SELECT SUM(CASE WHEN transaction_type = 'BUY' THEN quantity ELSE -quantity END) as total_quantity
-        FROM transactions
+        FROM Transactions
         WHERE user_id = ? AND symbol = ?
     ''', (user_id, symbol))
     stocks_owned = cursor.fetchone()[0]
     conn.close()
     return stocks_owned
+
+def owns_stock(ticker, userID) -> bool:
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT symbol
+        FROM Transactions
+        WHERE user_id = ?
+    ''', (userID,))
+    stocks_owned = cursor.fetchone()[0]
+    conn.close()
+
+    if ticker in stocks_owned:
+        return True
+    return False
+
+def get_holdings(ticker, userID) -> float:
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT price * quantity as holdings
+        FROM Transactions
+        WHERE user_id = ? AND symbol = ?
+    ''', (userID, ticker))
+    holdings = cursor.fetchone()[0]
+    conn.close()
+    return holdings
