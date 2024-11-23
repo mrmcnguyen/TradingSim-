@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Order</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="contentBody">
+        <div class="welcomeContainer">
+            <div class="border">
+            <h2 class="orderHeading">Order Confirmed</h2>
+
+            <div class="orderDetails">
+                <p><strong>Stock:</strong> {{ order_details['symbol'] }}</p>
+                <p><strong>Quantity:</strong> {{ order_details['quantity'] }}</p>
+                <p><strong>Order Type:</strong> {{ order_details['order_type'] }}</p>
+                <p><strong>Total Price:</strong> ${{ order_details['total_price'] }}</p>
+                <p><strong>Buying Power:</strong> ${{ order_details['buying_power']|float|round(2) }}</p>
+            </div>
+
+            <p>Your order has been confirmed.</p>
+        </div>
+
+        <a class="backButton" href="{{ url_for('index') }}">Back</a>
+
+        </div>
+    </div>
+</body>
+</html>

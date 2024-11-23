@@ -1,0 +1,838 @@
+:root{
+    --main-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --main-background-color: #D5D8DC;
+    --main-text-color: #4e5863;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+
+h1 {
+    color:#525252
+}
+
+
+h5, h6 {
+    margin: 20px;
+    color: #4e586367;
+
+}
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+
+    font-family: var(--main-font-family);
+    background-color: var(--main-background-color);
+    color: var(--main-text-color);
+    max-width: 99vw;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: auto;
+    justify-content: flex-start;
+}
+
+.sidebar {
+    left: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+}
+
+.sidebarOptions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebarButton {
+    background-color: #f1f1f1;
+    color: #979A9A;
+    font-weight: 400;
+    border: 0;
+    margin-bottom: 40px;
+    width: 100%;
+    text-align: left;
+    overflow-x: hidden;
+}
+
+.sidebarButton:hover {
+    background-color: #f1f1f1;
+    color: #0070f3
+}
+
+.sidebarButtonSelected {
+    background-color: #f1f1f1;
+    font-weight: 400;
+    border: 0;
+    margin-bottom: 40px;
+    width: 100%;
+    text-align: left;
+    overflow-x: hidden;
+    color: #0070f3
+}
+
+.sidebarButtonSelected:hover {
+    background-color: #f1f1f1;
+    color: #0070f3
+}
+
+.sidebarLogoText {
+    margin-bottom: 70px;
+    text-align: center;
+    background: #0070f3;
+    border-radius: 5px;
+    padding: 3px;
+    color: #f5f5f5;
+    box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
+}
+
+.bottomContent {
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.logo {
+    font-size: 1.5em;
+    color: #4e586367;
+    text-align: center;
+}
+
+.disclaimer {
+    color: #4e5863;
+    font-size: 1em;
+    text-align: center;
+    margin: 5px;
+    margin-bottom: 10px
+}
+
+.welcomeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.dashboardContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    overflow-y: auto;
+    margin-left: 200px;
+}
+.platform {
+    padding:20px;
+    width: 80vw;
+    border-radius: 10px;
+    background-color: #D5D8DC;
+    margin: 15px
+}
+
+.dashboardContentsContainer {
+    display: flex;
+    margin-top: 20px;
+    margin-right: 20px;
+    flex-direction: column;
+    border-radius: 10px;
+    width: 50vw;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: calc(66.66%); /* This container takes 66.66% of the width with 20px spacing */
+    box-sizing: border-box;
+    transition: box-shadow 0.3s;
+    flex:2;
+    background-color: #0071f314;
+}
+.dashboardContentsContainer:hover {
+    box-shadow: 0 0 5px 7px #0071f314;
+}
+
+.dashboardContents {
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    padding: 0px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+
+
+.secondRow {
+    display:flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+
+.topMoversContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: #0071f314;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    transition: box-shadow 0.3s;
+    flex:1;
+}
+
+
+.topMoversContainer:hover {
+    box-shadow: 0 0 5px 7px #0071f314;
+}
+
+
+.legend{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.topMoversTable {
+    display:flex;
+    width: 100%
+}
+
+
+.topMovers{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.portfolioBox {
+    background-color: #0071f314;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    flex: 1;
+    text-align: center;
+    transition: box-shadow 0.3s;
+}
+.portfolioBox:hover {
+    box-shadow: 0 0 5px 7px #0071f314;
+}
+
+
+.gainBox {
+    background-color: #0071f314;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    flex: 1;
+    transition: box-shadow 0.3s;
+    text-align: center;
+}
+
+
+.gainBox:hover {
+    box-shadow: 0 0 5px 7px #0071f314;
+}
+
+
+.balanceBox {
+    background-color: #0071f314;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    flex: 1;
+    transition: box-shadow 0.3s;
+    text-align: center;
+}
+.balanceBox:hover {
+    box-shadow: 0 0 5px 7px #0071f314;
+}
+
+
+.dashboardDisplay {
+    font-size: 2em;
+    font-weight: bold;
+    color:#525252;
+    margin: 0;
+}
+
+
+.boxHeader {
+    font-size: 0.8em;
+    padding:0;  
+    text-align: center;
+    color:#525252
+}
+
+
+.contentBody {
+    display: flex;
+    width: 80vw;
+    flex-direction: column;
+    height: 100vh;
+    margin-left: 20px;
+    box-shadow: 0 0 5px 3px #D5D8DC;
+    border-radius: 10px;
+    background-color: #eeeeee93;
+    align-items: center;
+   
+}
+.contentContainer {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+}
+
+
+h2 {
+    font-size: 2em;
+    text-align: left;
+    padding-left: 50px;
+}
+
+
+.ce {
+    max-width: 700px; /* Optional: Set a maximum width for the centered element */
+    width: 100%;
+    margin: auto;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: #0071f314;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+
+form{
+    display: flex;
+    flex-direction: column;
+    margin:20px;
+    width: 20%;
+    height: 12%;
+    justify-content: center
+}
+
+
+.buyFormHeading {
+    color: #525252;
+    font-size: 2em;
+    text-align: left;
+    padding-left: 0;
+    margin: 20px
+}
+
+
+.buyForm {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+}
+
+
+.textEntry{
+    border: 1px solid;
+    border-radius: 0.4rem;
+    width: 100%;
+    background-color: #5a5a5a;
+    height: 100%;
+    padding: 10px;
+    color:#ffffff
+}
+
+
+.Input-text::placeholder {
+    color: #B0BEC5;
+  }
+ 
+  .Input-text:focus {
+    outline: none;
+    box-shadow: 0.2rem 0.8rem 1.6rem ;
+  }
+
+
+.welcome {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+
+p{
+    font-size: 1.2em;
+}
+
+
+a {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #3498db;
+    color: #ffffff;
+    background-color: #3498db;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
+ 
+a:hover {
+    background-color: #ffffff;
+    color: #3498db;
+    border-color: #3498db;
+  }
+
+
+.link {
+    font-size:small;
+    background-color: transparent;
+    color: #4e586367;
+    border: 0;
+    padding: 0;
+}
+
+
+.link:hover {
+    font-size:small;
+    background-color: transparent;
+    color: #4e5863;
+    border: 0;
+}
+
+
+
+
+
+
+.start {
+    width: 100%;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #3498db;
+    color: #ffffff;
+    background-color: #3498db;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
+ 
+.start:hover {
+    background-color: #ffffff;
+    color: #3498db;
+    border-color: #3498db;
+  }
+
+
+.results {
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: left;
+    text-align: left;
+}
+
+
+/* Add this to your style.css file */
+.stockDetailsGrid {
+    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.column {
+    flex: 1;
+    padding: 10px;
+    width: 40%;
+    text-align: left;
+}
+
+
+.tickerButton {
+    width: 100%;
+    text-decoration: none; 
+    color: #525252; 
+    background-color: #0071f323;
+    font-weight: 400;
+    padding: 10px 20px; 
+    display: inline-block;
+    border-radius: 0;
+    transition: background-color 0.3s, color 0.3s;
+    border: none
+}
+
+
+.tickerButton:hover {
+    background-color: #ffffff;
+    color: #3498db;
+}
+
+.buyStockHeading {
+    padding: 0
+}
+
+.searchBar {
+    border-radius: 25px;
+    border: 0;
+    height: 100%;
+    padding-left: 20px;
+    font-size: 1.2em;
+    color: white;
+}
+
+
+.searchBar:focus {
+    border: 0;
+}
+
+.searchButton {
+   
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    border: none;
+    padding: 0 56px;
+    margin: 15px;
+    line-height: 45px;
+    border-radius: 7px;
+    background-color: #0070f3;
+    color: white;
+    font-weight: 400;
+    font-size: 16px;
+    box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
+    transition: background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
+  }
+
+
+  .searchButton:hover{
+        background: rgba(0,118,255,0.9);
+        color: white;
+        box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
+    }
+
+
+
+button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #3498db;
+    color: #ffffff;
+    background-color: #3498db;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    max-width: 100%; /* Set maximum width to prevent overflow */
+}
+ 
+  button:hover {
+    background-color: #ffffff;
+    color: #3498db;
+    border-color: #3498db;
+  }
+
+
+.backButton {
+    width: 200px;
+    margin-top:20px
+
+
+}
+
+
+.stockBackButton {
+    margin-left: 50px;
+    width: 200px;
+}
+
+
+.buyAndSell {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.buyColumn {
+    width: 30vw;
+    display:flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 10px;
+    margin-left: 50px;
+    background-color: #F5F5F5;
+    padding: 25px;
+    align-items: center;
+}
+
+
+.sellColumn {
+    width: 30vw;
+    display:flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #F5F5F5;
+    padding: 25px;
+    align-items: center;
+}
+
+
+.buyButton {
+    width: 100%;
+    text-align: left;
+    margin-top: 0;
+    padding: 0;
+    color: #525252;
+}
+
+
+.sellButton{
+    width: 100%;
+    text-align: left;
+    margin-top: 0;
+    padding: 0;
+    color: #525252;
+}
+
+
+.dropdown {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+.sellQuantity,
+.buyQuantity,
+.buyOrderMenu,
+.sellOrderMenu {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+
+.orderTypeBlock {
+    margin-left: 20px;
+}
+
+
+.orderHeading {
+    padding:0;
+}
+
+
+.dashboardHeading{
+    margin-top: 0;
+    padding: 0;
+    color: #525252;
+}
+.buy {
+    background-color: #3dc55a;
+    width: 40%;
+    margin: 10px;
+    border: none;
+    margin-left: none;
+}
+
+
+.sell {
+    background-color: #ff5b5b;
+    width: 40%;
+    margin: 10px;
+    border: none;
+    margin-left: none;
+}
+
+
+.border{
+    padding: 40px;
+    border-radius: 25px;
+    border: 2px solid #000;
+    border-style: solid;
+    border-color: #00f19f #00FD92;
+    box-shadow:  5px 5px 100px #61dafbaa; /* Added box-shadow property */
+}
+
+.viewHoldingsButton {
+   
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    border-radius: 7px;
+    background-color: #0070f3;
+    color: white;
+    font-weight: 400;
+    font-size: 16px;
+    box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
+    transition: background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
+  }
+
+
+  .viewHoldingsButton:hover{
+        background: rgba(0,118,255,0.9);
+        color: white;
+        box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
+    }
+
+
+.tradeButton {
+   
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    border: none;
+    padding: 0 56px;
+    margin: 15px;
+    width: 40%;
+    line-height: 45px;
+    border-radius: 7px;
+    background-color: #0070f3;
+    color: white;
+    font-weight: 400;
+    font-size: 16px;
+    box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
+    transition: background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
+  }
+
+
+  .tradeButton:hover{
+        background: rgba(0,118,255,0.9);
+        color: white;
+        box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
+    }
+ 
+.userBalanceDisplayStock {
+    padding-left: 50px;
+}
+
+.dashboardPortfolio{
+    width: 100%;
+}
+
+.portfolioList {
+    list-style: none;
+    padding: 0;
+}
+
+.legendGrid{
+    display: flex;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    flex-direction: row;
+    font-size: 0.8em
+}
+
+.Lcolumn {
+    flex: 1;
+    padding: 10px;
+    width: 40%;
+    text-align: left;
+    font-weight: 300;   
+    padding-left: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.portfolioItem {
+    border-radius: 5px;
+    height:40%;
+    color: #525252;
+    transition: box-shadow 0.3s;
+}
+
+
+.portfolioGrid {
+    display:flex;
+    flex-direction: row;
+}
+
+
+.moverItem {
+    width: 100%;
+    margin: 10px 0;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #2C3E50;
+    color: #D5D8DC;
+    transition: box-shadow 0.3s;
+    cursor: pointer;
+}
+
+
+.legendContainer {
+    width: 100%;
+    border-radius: 5px;
+    color: #525252;
+    transition: box-shadow 0.3s;
+    cursor: pointer;
+    border-bottom: #00FD92;
+}
+
+
+.stockDetailsGrid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left:50px;
+    width: 50vw;
+    background-color: #F5F5F5 ;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    flex: 1;
+    text-align: center;
+    transition: box-shadow 0.3s;
+}
+
+
+.column {
+    flex: 1;
+    padding: 10px;
+    width: 40%;
+    text-align: left;
+}

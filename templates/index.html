@@ -1,0 +1,149 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Trading Simulator</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script src="{{ url_for('static', filename='chart.js') }}"></script>
+
+
+</head>
+<body>
+   <div class="sidebar">
+       <div class="sidebarLogo">
+       <h3 class="sidebarLogoText">Trading Simulator 2024.</h3>
+       </div>
+       <div class="sidebarOptions">
+           <p>Menu</p>
+       <ul>
+           <li><a class="sidebarButtonSelected" href="{{ url_for('index') }}"><i class="fas fa-home"></i> Home</a></li>
+           <li><a class="sidebarButton" href="{{ url_for('holdings') }}"><i class="fa-solid fa-hand-holding-dollar"></i> Holdings</a></li>
+           <li><a class="sidebarButton" href="{{ url_for('search') }}"><i class="fas fa-search"></i> Search</a></li>
+           <li><a class="sidebarButton" href="#"><i class="fas fa-info-circle"></i> About</a></li>
+           <li><a class="sidebarButton" href="#"><i class="fas fa-user"></i> Profile</a></li>
+           
+       </ul>
+   </div>
+   </div>
+ 
+   <div class="dashboardContainer">
+
+
+       <!--<h4 class="logo">All trades are simulations with real data.</h4>-->
+       <!--<h5 class="disclaimer">Please note all data on this page is only refreshed when the page is reloaded.</h5>-->
+       <div class="platform">
+       <h1>Welcome, {{ user[1] }}</h1>
+
+
+       <div class="dashboardContents">
+           <div class="portfolioBox">
+               <h2 class="boxHeader">Portfolio Value</h2>
+               <p class="dashboardDisplay">${{ portfolioValue|float|round(2) }}</p>
+           </div>
+ 
+           <div class="balanceBox">
+               <h2 class="boxHeader">Balance</h2>
+               <p class="dashboardDisplay">${{ user[2]|float|round(2) }}</p>
+           </div>
+ 
+           <div class="gainBox">
+               <h2 class="boxHeader">Net Profit/Loss</h2>
+               <p class="dashboardDisplay">${{ PandL|float|round(2) }}</p>
+           </div>
+           <div class="portfolioBox">
+               <h2 class="boxHeader">Percentage Change</h2>
+               <p class="dashboardDisplay">{{ percentageChange|float|round(2) }}%</p>
+           </div>
+       </div>
+
+
+       <div class="secondRow">
+       <div class="dashboardContentsContainer">
+   <h2 class="dashboardHeading">Performance</h2>
+   <div class="chart">
+    <canvas id="myChart" width="600" height="300"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   </div>
+
+
+   <!-- <a href="'{{ url_for('sell')}}">SELL</a> -->
+   <a class="tradeButton" href="{{ url_for('search') }}">Trade</a>
+</div>
+   <div class="topMoversContainer">
+       <h2 class="dashboardHeading">Holdings</h2>
+
+       <ul class="dashboardPortfolio">
+        <div class="legendGrid">
+            <div class="Lcolumn">
+                <p>INSTRUMENT</p>
+            </div>
+            <div class="Lcolumn">
+                <p>POSITION</p>
+            </div>
+            <div class="Lcolumn">
+                <p>MKT VALUE</p>
+            </div>
+            <div class="Lcolumn">
+                <p>CHANGE%</p>
+            </div>
+        </div>
+        {% for stock in portfolio %}
+        <li class="portfolioItem">
+            <div class="portfolioGrid">
+                <div class="column">
+                    <p>{{ stock[0] }}</p>
+                </div>
+                <div class="column">
+                    <p>{{ stock[1] }}</p>
+                </div>
+                <div class="column">
+                    <p>{{ stock[5]|float|round(2) }}</p>
+                </div>
+                <div class="column">
+                    <p>{{ stock[6] }}</p>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <a class="viewHoldingsButton" href="{{ url_for('holdings') }}">View Holdings</a>
+       <div class="topMoversTable">
+           <ul class="topMovers">
+               {% for stock in top_movers %}
+               <li class="moverItem">
+                   <div class="topMoversTable">
+                       <div class="column">
+                           <p>{{ stock['ticker'] }}</p>
+                       </div>
+                       <div class="column">
+                           <p>{{ stock['price'] }}</p>
+                       </div>
+                       <div class="column">
+                           <p>{{ stock['change_amount'] }}</p>
+                       </div>
+                       <div class="column">
+                           <p>{{ stock['change_percentage'] }} </p>
+                       </div>
+                   </div>
+               </li>
+               {% endfor %}
+           </ul>
+       </div>
+   </div>
+</div>
+</div>
+<div class="footer">
+   <h5>&copy; 2024 Trading Simulator. All rights reserved.</h5>
+   <h6>Powered by Jinja within the Flask framework. Stock data provided by <a class="link" href="https://www.alphavantage.co/"  target="_blank"><u>Alpha Vantage API</u></a>. All information is stored locally.</h6>
+</div>
+</div>
+</body>
+</html>
+
+
+

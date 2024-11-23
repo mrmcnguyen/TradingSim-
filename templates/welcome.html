@@ -1,0 +1,24 @@
+<!-- templates/welcome.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Simulator</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <div class="welcomeContainer">
+    <h1 class="welcome">Trading Simulator 2024</h1>
+    <p>Enter your name to get started.</p>
+    <form method="post" action="{{ url_for('welcome') }}">
+    <input class="textEntry" type="text" name="name"  placeholder="First Name" required>
+    <input class="start" type="submit" value="Get Started">
+    </form>
+    </div>
+</body>
+</html>

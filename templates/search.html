@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Stocks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebarLogo">
+        <h3 class="sidebarLogoText">Trading Simulator 2024.</h3>
+        </div>
+        <div class="sidebarOptions">
+            <p>Menu</p>
+        <ul>
+            <li><a class="sidebarButton" href="{{ url_for('index') }}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a class="sidebarButton" href="{{ url_for('holdings') }}"><i class="fa-solid fa-hand-holding-dollar"></i> Holdings</a></li>
+            <li><a class="sidebarButtonSelected" href="{{ url_for('search') }}"><i class="fas fa-search"></i> Search</a></li>
+            <li><a class="sidebarButton" href="#"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a class="sidebarButton" href="#"><i class="fas fa-user"></i> Profile</a></li>
+        </ul>
+    </div>
+    </div>
+    <div class="dashboardContainer">
+
+        <div class = "ce">
+        <h2 class="buyStockHeading">Search</h2>
+        <form class="buyForm" method="POST" action="{{ url_for('search') }}">
+            <input class="searchBar" type="text" name="searchTerm" placeholder="Search" required>
+            <br>
+            <button class="searchButton" type="submit">Search</button>
+        </form>
+
+        {% if search_term %}
+            <h3>Search Results for "{{ search_term }}"</h3>
+            {% if stocks %}
+            <div class="results">
+                <ul>
+                    {% for symbol in stocks %}
+                        <li><a class="tickerButton" href="{{ url_for('stock_details', symbol=symbol['symbol']) }}">{{ symbol['symbol'] }} - {{ symbol['symbolName'] }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No results found.</p>
+            {% endif %}
+        </div>
+        {% endif %}
+        </div>
+    </div>
+</body>
+</html>

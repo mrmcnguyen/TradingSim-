@@ -1,0 +1,113 @@
+<!-- templates/stock_details.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ stock_data['Global Quote']['01. symbol'] }} - Stock Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="contentBody">
+        <div class="contentContainer">
+            <h2>{{ stock_data['Global Quote']['01. symbol'] }} - Stock Details</h2>
+
+            <div class="stockDetailsGrid">
+                <div class="column">
+                    <ul>
+                        <li><strong>Open:</strong> {{ stock_data['Global Quote']['02. open'] }}</li>
+                        <li><strong>High:</strong> {{ stock_data['Global Quote']['03. high'] }}</li>
+                        <li><strong>Low:</strong> {{ stock_data['Global Quote']['04. low'] }}</li>
+                        <li><strong>Price:</strong> {{ stock_data['Global Quote']['05. price'] }}</li>
+                        <li><strong>Volume:</strong> {{ stock_data['Global Quote']['06. volume'] }}</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <ul>
+                        <li><strong>Latest Trading Day:</strong> {{ stock_data['Global Quote']['07. latest trading day'] }}</li>
+                        <li><strong>Previous Close:</strong> {{ stock_data['Global Quote']['08. previous close'] }}</li>
+                        <li><strong>Change:</strong> {{ stock_data['Global Quote']['09. change'] }}</li>
+                        <li><strong>Change Percent:</strong> {{ stock_data['Global Quote']['10. change percent'] }}</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+        <form class="buyColumn" method="POST" action="{{ url_for('buy', ticker=stock_data['Global Quote']['01. symbol']) }}">
+            <label class="buyButton">
+                Buy
+            </label>
+            <div id="buyDropdown" class="dropdown">
+                <div class="quantityBlock">
+                <label for="quantity">Quantity:</label>
+                <input class="buyQuantity" type="number" id="quantity" name="quantity" min="1" value="1">
+                </div>
+            <div class="orderTypeBlock"></div>
+                <label for="orderType">Order Type:</label>
+                <select class="buyOrderMenu" id="orderType" >
+                    <option value="market">Market Order</option>
+                    <option value="limit">Limit Order</option>
+                </select>
+            </div>
+            <button class="buy" type="submit">
+                BUY {{stock_data['Global Quote']['01. symbol']}}
+            </button>
+        </form>
+            <div class="sellColumn">
+                <label class="sellButton">
+                    Sell 
+                </label>
+                <div id="sellDropdown" class="dropdown">
+                    <div class="quantityBlock">
+                    <label for="quantity">Quantity:</label>
+                    <input class="sellQuantity" type="number" id="quantity" name="quantity" min="1" value="1">
+                </div>
+                <div class="orderTypeBlock"></div>
+                    <label for="orderType">Order Type:</label>
+                    <select class="sellOrderMenu" id="orderType">
+                        <option value="market">Market Order</option>
+                        <option value="limit">Limit Order</option>
+                    </select>
+                </div>
+                <label class="sell" onclick="showBuyPopup()">
+                    SELL
+                </label>
+                </div>
+            <div class="balanceDisplayColumn">
+                <p class="userBalanceDisplayStock"><strong>Buying Power:</strong> ${{ user_balance[0]|float|round(2) }}</p>
+                </div>
+                <a class="stockBackButton" href="{{ url_for('search') }}">Back to Search</a>
+                </div>
+    <!-- Placeholder div for the Plotly chart -->
+    <div id="chart"></div>
+
+    <!-- JavaScript to create the Plotly chart -->
+    <script>
+        // Sample data for the chart
+        var data = [{
+            x: [1, 2, 3, 4, 5],
+            y: [10, 11, 13, 12, 14],
+            type: 'scatter'
+        }];
+
+        // Layout configuration for the chart
+        var layout = {
+            title: 'PLACEHOLDER ONLY',
+            xaxis: {
+                title: 'X-axis'
+            },
+            yaxis: {
+                title: 'Y-axis'
+            },
+
+        };
+
+        // Create the chart
+        Plotly.newPlot('chart', data, layout);
+    </script>
+    </div>
+</body>
+</html>
